@@ -1,139 +1,155 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { Card } from "@/components/ui/card";
-import { Code2, Rocket, Brain, Heart } from "lucide-react";
-
-const highlights = [
-  {
-    icon: Code2,
-    title: "Frontend Expert",
-    description:
-      "Nearly 9 years building performant, accessible, and beautiful web applications with modern technologies.",
-  },
-  {
-    icon: Rocket,
-    title: "Web3 Pioneer",
-    description:
-      "3+ years architecting decentralized applications and ecosystem platforms in the blockchain space.",
-  },
-  {
-    icon: Brain,
-    title: "AI Enthusiast",
-    description:
-      "Passionate about AI-powered development. Building AI-first projects and integrating AI into daily workflows.",
-  },
-  {
-    icon: Heart,
-    title: "Lifelong Learner",
-    description:
-      "Continuously expanding skills into backend, databases, and cloud technologies to become a well-rounded engineer.",
-  },
-];
+import { motion } from 'framer-motion'
+import { SectionHeading } from '@/components/ui/section-heading'
+import { Code2, Rocket, Brain, Heart, MapPin, Calendar, Coffee, Zap } from 'lucide-react'
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
+    transition: { staggerChildren: 0.1 },
   },
-};
+}
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
-};
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+}
 
 export function About() {
   return (
-    <section id="about" className="relative py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          title="About Me"
-          subtitle="A passionate developer who loves creating impactful digital experiences"
-        />
+    <section id='about' className='relative py-24'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <SectionHeading title='About Me' subtitle='A glimpse into who I am and what drives me' />
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Text content */}
+        {/* Bento Grid Layout */}
+        <motion.div
+          className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[180px]'
+          variants={containerVariants}
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, margin: '-100px' }}
+        >
+          {/* Main intro - spans 2 cols and 2 rows */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={itemVariants}
+            className='md:col-span-2 md:row-span-2 gradient-border p-6 flex flex-col justify-between group hover:scale-[1.02] transition-transform'
           >
-            <div className="space-y-6 text-lg text-muted leading-relaxed">
-              <p>
-                I&apos;m{" "}
-                <span className="text-foreground font-semibold">
-                  Daniel Nguyen
-                </span>
-                , a Senior Frontend Developer with a passion for building
-                exceptional digital experiences. Over the past{" "}
-                <span className="text-primary font-semibold">9 years</span>,
-                I&apos;ve had the privilege of working on diverse projects that
-                have shaped my expertise and perspective.
+            <div>
+              <h3 className='text-2xl font-bold mb-4 gradient-text'>Hello there! 👋</h3>
+              <p className='text-muted leading-relaxed'>
+                I'm <span className='text-foreground font-semibold'>Daniel Nguyen</span>, a Senior Frontend Developer
+                with a passion for crafting exceptional digital experiences. With nearly{' '}
+                <span className='text-primary font-semibold'>9 years</span> of experience, I've had the privilege of
+                working on diverse projects that have shaped my expertise.
               </p>
-              <p>
-                In the last{" "}
-                <span className="text-secondary font-semibold">3 years</span>,
-                I&apos;ve been deeply immersed in the{" "}
-                <span className="text-primary">Web3 ecosystem</span>, working on
-                a platform that connects multiple products into a cohesive
-                experience. This journey has taught me the importance of
-                building scalable, user-centric applications.
+              <p className='text-muted leading-relaxed mt-4'>
+                In the last 3 years, I've been deeply immersed in the{' '}
+                <span className='text-primary'>Web3 ecosystem</span>, building platforms that connect multiple products
+                into cohesive experiences.
               </p>
-              <p>
-                Beyond frontend, I&apos;m actively expanding my horizons into{" "}
-                <span className="text-foreground">backend development</span>,{" "}
-                <span className="text-foreground">database architecture</span>,
-                and <span className="text-foreground">cloud technologies</span>.
-                I believe in being a well-rounded engineer who can tackle
-                challenges across the stack.
-              </p>
-              <p>
-                I&apos;m particularly excited about{" "}
-                <span className="text-accent font-semibold">AI</span> and use it
-                daily to enhance my productivity. I have plans to build AI-first
-                projects that push the boundaries of what&apos;s possible.
+            </div>
+            <div className='flex items-center gap-4 text-sm text-muted mt-4'>
+              <span className='flex items-center gap-1'>
+                <MapPin className='w-4 h-4' />
+                Ho Chi Minh City
+              </span>
+              <span className='flex items-center gap-1'>
+                <Calendar className='w-4 h-4' />
+                Since 2015
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Frontend Expert */}
+          <motion.div
+            variants={itemVariants}
+            className='glass-card p-6 flex flex-col justify-between group hover:bg-primary/5 transition-colors'
+          >
+            <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary-light/20 flex items-center justify-center group-hover:scale-110 transition-transform'>
+              <Code2 className='w-6 h-6 text-primary' />
+            </div>
+            <div>
+              <h4 className='font-bold text-foreground'>Frontend Expert</h4>
+              <p className='text-sm text-muted'>React, Next.js, TypeScript</p>
+            </div>
+          </motion.div>
+
+          {/* Web3 Pioneer */}
+          <motion.div
+            variants={itemVariants}
+            className='glass-card p-6 flex flex-col justify-between group hover:bg-secondary/5 transition-colors'
+          >
+            <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-secondary/20 to-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform'>
+              <Rocket className='w-6 h-6 text-secondary' />
+            </div>
+            <div>
+              <h4 className='font-bold text-foreground'>Web3 Pioneer</h4>
+              <p className='text-sm text-muted'>3+ years in blockchain</p>
+            </div>
+          </motion.div>
+
+          {/* AI Enthusiast - spans 2 cols */}
+          <motion.div
+            variants={itemVariants}
+            className='md:col-span-2 glass-card p-6 flex items-center gap-6 group hover:bg-accent/5 transition-colors'
+          >
+            <div className='w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-orange-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform'>
+              <Brain className='w-8 h-8 text-accent' />
+            </div>
+            <div>
+              <h4 className='font-bold text-foreground text-lg'>AI Enthusiast</h4>
+              <p className='text-muted'>
+                I use AI daily to enhance productivity and have plans to build AI-first projects that push the
+                boundaries of what's possible.
               </p>
             </div>
           </motion.div>
 
-          {/* Right side - Highlight cards */}
+          {/* Lifelong Learner */}
           <motion.div
-            className="grid gap-4 sm:grid-cols-2"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            variants={itemVariants}
+            className='glass-card p-6 flex flex-col justify-between group hover:bg-primary/5 transition-colors'
           >
-            {highlights.map((item) => (
-              <motion.div key={item.title} variants={itemVariants}>
-                <Card variant="gradient" className="h-full">
-                  <div className="flex flex-col gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-purple-500/20 flex items-center justify-center">
-                      <item.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-muted leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
+            <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform'>
+              <Heart className='w-6 h-6 text-primary' />
+            </div>
+            <div>
+              <h4 className='font-bold text-foreground'>Lifelong Learner</h4>
+              <p className='text-sm text-muted'>Backend, Cloud, Databases</p>
+            </div>
           </motion.div>
-        </div>
+
+          {/* Fun fact */}
+          <motion.div
+            variants={itemVariants}
+            className='glass-card p-6 flex flex-col justify-between bg-gradient-to-br from-primary/5 to-transparent'
+          >
+            <Coffee className='w-8 h-8 text-primary' />
+            <div>
+              <p className='text-3xl font-bold gradient-text'>∞</p>
+              <p className='text-sm text-muted'>Cups of coffee</p>
+            </div>
+          </motion.div>
+
+          {/* Currently */}
+          <motion.div variants={itemVariants} className='md:col-span-2 glass-card p-6 flex items-center gap-4 group'>
+            <div className='relative'>
+              <Zap className='w-8 h-8 text-secondary' />
+              <motion.div
+                className='absolute inset-0 rounded-full bg-secondary/20'
+                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </div>
+            <div>
+              <p className='text-sm text-muted'>Currently working on</p>
+              <p className='font-bold text-foreground'>Web3 Ecosystem Platform</p>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
-  );
+  )
 }
