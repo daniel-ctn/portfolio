@@ -36,7 +36,7 @@ export function Footer() {
               />
             </motion.div>
             <span className='font-semibold text-lg'>
-              Daniel<span className='text-primary'>.</span>dev
+              daniel<span className='text-primary'>.</span>dev
             </span>
           </Link>
 

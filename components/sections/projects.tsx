@@ -19,7 +19,7 @@ const projects = [
     icon: Globe,
     gradient: 'from-violet-600 via-purple-600 to-indigo-600',
     shadowColor: 'shadow-purple-500/20',
-    stats: { users: '10K+', transactions: '1M+', chains: '5' },
+    stats: { users: '10K+', transactions: '1M+', chains: '7' },
   },
   {
     title: 'AI Code Assistant',
@@ -35,7 +35,7 @@ const projects = [
     comingSoon: true,
     gradient: 'from-cyan-500 via-teal-500 to-emerald-500',
     shadowColor: 'shadow-teal-500/20',
-    stats: { accuracy: '95%', languages: '20+', speedup: '3x' },
+    stats: { accuracy: '95%', languages: '10+', speedup: '3x' },
   },
   {
     title: 'NFT Marketplace',

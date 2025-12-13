@@ -53,7 +53,7 @@ export function Navbar() {
               />
             </motion.div>
             <span className='font-semibold text-lg hidden sm:block'>
-              Daniel<span className='text-primary'>.</span>dev
+              daniel<span className='text-primary'>.</span>dev
             </span>
           </Link>
 
