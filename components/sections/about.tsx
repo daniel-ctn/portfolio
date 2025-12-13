@@ -57,7 +57,7 @@ export function About() {
               </span>
               <span className='flex items-center gap-1'>
                 <Calendar className='w-4 h-4' />
-                Since 2015
+                Since 2017
               </span>
             </div>
           </motion.div>
