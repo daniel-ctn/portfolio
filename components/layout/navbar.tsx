@@ -5,6 +5,7 @@ import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 const navLinks = [
@@ -39,11 +40,17 @@ export function Navbar() {
           {/* Logo */}
           <Link href='/' className='flex items-center gap-2'>
             <motion.div
-              className='w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white font-bold text-lg'
+              className='w-10 h-10 rounded-xl overflow-hidden'
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
-              D
+              <Image
+                src='/daniel-chibi.jpg'
+                alt='Daniel Nguyen'
+                width={40}
+                height={40}
+                className='w-full h-full object-cover'
+              />
             </motion.div>
             <span className='font-semibold text-lg hidden sm:block'>
               Daniel<span className='text-primary'>.</span>dev

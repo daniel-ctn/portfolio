@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { ArrowDown, Github, Linkedin, Mail, Sparkles, Code2, Zap } from 'lucide-react'
-import { TypingAnimation, WordRotate } from '@/components/ui/text-animations'
+import { WordRotate } from '@/components/ui/text-animations'
 import { MagneticButton } from '@/components/ui/magnetic-button'
 import { FloatingElement, GlowingOrb } from '@/components/ui/parallax'
 
@@ -48,7 +49,7 @@ export function Hero() {
           </div>
         </FloatingElement>
 
-        <FloatingElement delay={1} className='absolute bottom-1/3 left-1/5'>
+        <FloatingElement delay={1} className='absolute bottom-1/3 left-[15%]'>
           <div className='w-16 h-16 rounded-2xl glass-card flex items-center justify-center -rotate-12'>
             <Zap className='w-6 h-6 text-secondary' />
           </div>
@@ -65,109 +66,141 @@ export function Hero() {
       </div>
 
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
-        <motion.div className='text-center' variants={containerVariants} initial='hidden' animate='visible'>
-          {/* Badge */}
-          <motion.div variants={itemVariants}>
-            <MagneticButton className='px-4 py-2 rounded-full glass-card mb-8 cursor-default' strength={0.2}>
-              <Sparkles className='w-4 h-4 text-primary mr-2' />
-              <span className='text-sm font-medium text-muted'>Available for new opportunities</span>
-            </MagneticButton>
-          </motion.div>
-
-          {/* Main heading with unique layout */}
-          <motion.div variants={itemVariants} className='mb-6'>
-            <h1 className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-none'>
-              <span className='block text-muted text-2xl sm:text-3xl md:text-4xl font-normal mb-4'>Hi there, I'm</span>
-              <span className='gradient-text relative'>
-                Daniel Nguyen
-                <motion.span
-                  className='absolute -right-4 -top-4 text-4xl'
-                  animate={{ rotate: [0, 20, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  👋
-                </motion.span>
-              </span>
-            </h1>
-          </motion.div>
-
-          {/* Animated role */}
-          <motion.div
-            variants={itemVariants}
-            className='text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground mb-8 h-12'
-          >
-            <span className='text-muted'>A </span>
-            <WordRotate words={roles} className='text-primary' />
-          </motion.div>
-
-          {/* Subtitle */}
-          <motion.p
-            variants={itemVariants}
-            className='text-lg md:text-xl text-muted max-w-2xl mx-auto mb-12 leading-relaxed'
-          >
-            Crafting exceptional digital experiences for{' '}
-            <span className='text-foreground font-semibold relative'>
-              9+ years
-              <svg
-                className='absolute -bottom-1 left-0 w-full'
-                viewBox='0 0 100 8'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <motion.path
-                  d='M0 4C20 4 20 1 40 1C60 1 60 7 80 7C100 7 100 4 100 4'
-                  stroke='var(--primary)'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1, delay: 1.5 }}
-                />
-              </svg>
-            </span>
-            . Specialized in building <span className='text-primary'>Web3 platforms</span> and exploring the frontier of{' '}
-            <span className='text-secondary'>AI-powered</span> applications.
-          </motion.p>
-
-          {/* CTA Buttons with magnetic effect */}
-          <motion.div
-            variants={itemVariants}
-            className='flex flex-col sm:flex-row items-center justify-center gap-6 mb-12'
-          >
-            <MagneticButton
-              href='#projects'
-              className='group px-8 py-4 text-lg bg-gradient-to-r from-primary to-primary-light text-white hover:shadow-xl hover:shadow-primary/30'
-            >
-              <span>View My Work</span>
-              <motion.span
-                className='ml-2 inline-block'
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
-            </MagneticButton>
-
-            <MagneticButton
-              href='#contact'
-              className='px-8 py-4 text-lg border-2 border-primary/50 text-primary hover:bg-primary/10 hover:border-primary'
-            >
-              Let's Talk
-            </MagneticButton>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div variants={itemVariants} className='flex items-center justify-center gap-4'>
-            <span className='text-sm text-muted mr-2'>Find me on</span>
-            {socialLinks.map((social, index) => (
-              <MagneticButton
-                key={social.label}
-                href={social.href}
-                className='p-3 rounded-full glass-card text-muted hover:text-foreground hover:bg-card'
-              >
-                <social.icon className='w-5 h-5' />
+        <motion.div
+          className='flex flex-col lg:flex-row items-center gap-12 lg:gap-16'
+          variants={containerVariants}
+          initial='hidden'
+          animate='visible'
+        >
+          {/* Left side - Text content */}
+          <div className='flex-1 text-center lg:text-left'>
+            {/* Badge */}
+            <motion.div variants={itemVariants}>
+              <MagneticButton className='px-4 py-2 rounded-full glass-card mb-8 cursor-default' strength={0.2}>
+                <Sparkles className='w-4 h-4 text-primary mr-2' />
+                <span className='text-sm font-medium text-muted'>Available for new opportunities</span>
               </MagneticButton>
-            ))}
+            </motion.div>
+
+            {/* Main heading with unique layout */}
+            <motion.div variants={itemVariants} className='mb-6'>
+              <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-none'>
+                <span className='block text-muted text-xl sm:text-2xl md:text-3xl font-normal mb-4'>Hi there, I'm</span>
+                <span className='gradient-text'>Daniel Nguyen</span>
+              </h1>
+            </motion.div>
+
+            {/* Animated role */}
+            <motion.div
+              variants={itemVariants}
+              className='text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-8 h-10'
+            >
+              <span className='text-muted'>A </span>
+              <WordRotate words={roles} className='text-primary' />
+            </motion.div>
+
+            {/* Subtitle */}
+            <motion.p
+              variants={itemVariants}
+              className='text-base md:text-lg text-muted max-w-xl mb-10 leading-relaxed'
+            >
+              Crafting exceptional digital experiences for{' '}
+              <span className='text-foreground font-semibold'>9+ years</span>. Specialized in building{' '}
+              <span className='text-primary'>Web3 platforms</span> and exploring{' '}
+              <span className='text-secondary'>AI-powered</span> applications.
+            </motion.p>
+
+            {/* CTA Buttons with magnetic effect */}
+            <motion.div
+              variants={itemVariants}
+              className='flex flex-col sm:flex-row items-center lg:items-start gap-4 mb-8'
+            >
+              <MagneticButton
+                href='#projects'
+                className='group px-8 py-4 text-lg bg-gradient-to-r from-primary to-primary-light text-white hover:shadow-xl hover:shadow-primary/30'
+              >
+                <span>View My Work</span>
+                <motion.span
+                  className='ml-2 inline-block'
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  →
+                </motion.span>
+              </MagneticButton>
+
+              <MagneticButton
+                href='#contact'
+                className='px-8 py-4 text-lg border-2 border-primary/50 text-primary hover:bg-primary/10 hover:border-primary'
+              >
+                Let's Talk
+              </MagneticButton>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div variants={itemVariants} className='flex items-center justify-center lg:justify-start gap-4'>
+              <span className='text-sm text-muted mr-2'>Find me on</span>
+              {socialLinks.map((social) => (
+                <MagneticButton
+                  key={social.label}
+                  href={social.href}
+                  className='p-3 rounded-full glass-card text-muted hover:text-foreground hover:bg-card'
+                >
+                  <social.icon className='w-5 h-5' />
+                </MagneticButton>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Right side - Profile Image */}
+          <motion.div variants={itemVariants} className='relative flex-shrink-0'>
+            {/* Decorative ring */}
+            <motion.div
+              className='absolute -inset-4 rounded-full bg-gradient-to-r from-primary via-secondary to-accent opacity-20 blur-2xl'
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            />
+
+            {/* Animated border */}
+            <motion.div
+              className='absolute -inset-1 rounded-full bg-gradient-to-r from-primary via-purple-500 to-secondary'
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+            />
+
+            {/* Image container */}
+            <motion.div
+              className='relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-background'
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <Image src='/daniel-chibi.jpg' alt='Daniel Nguyen' fill className='object-cover' priority />
+            </motion.div>
+
+            {/* Floating badges around image */}
+            <motion.div
+              className='absolute -top-2 -right-2 px-3 py-1.5 rounded-full glass-card text-sm font-medium'
+              animate={{ y: [-5, 5, -5] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <span className='text-primary'>9+ Years</span>
+            </motion.div>
+
+            <motion.div
+              className='absolute -bottom-2 -left-2 px-3 py-1.5 rounded-full glass-card text-sm font-medium'
+              animate={{ y: [5, -5, 5] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+            >
+              <span className='text-secondary'>Web3 Expert</span>
+            </motion.div>
+
+            <motion.div
+              className='absolute top-1/2 -right-8 px-3 py-1.5 rounded-full glass-card text-sm font-medium'
+              animate={{ x: [-5, 5, -5] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+            >
+              <span className='text-accent'>AI Lover</span>
+            </motion.div>
           </motion.div>
         </motion.div>
 
