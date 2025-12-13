@@ -10,7 +10,7 @@ const skillCategories = [
     title: 'Frontend',
     icon: Code2,
     color: 'primary',
-    skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'TailwindCSS', 'Framer Motion', 'Vue.js', 'HTML5', 'CSS3'],
+    skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'TailwindCSS', 'Framer Motion', 'HTML5', 'CSS3'],
   },
   {
     title: 'Web3',

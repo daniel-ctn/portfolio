@@ -104,7 +104,7 @@ export function Contact() {
                     <input
                       type='text'
                       id='name'
-                      className='w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted focus:outline-none focus:border-primary/50 transition-colors'
+                      className='w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition-colors'
                       placeholder='Your name'
                     />
                   </div>
@@ -115,7 +115,7 @@ export function Contact() {
                     <input
                       type='email'
                       id='email'
-                      className='w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted focus:outline-none focus:border-primary/50 transition-colors'
+                      className='w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition-colors'
                       placeholder='your@email.com'
                     />
                   </div>
@@ -127,7 +127,7 @@ export function Contact() {
                   <input
                     type='text'
                     id='subject'
-                    className='w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted focus:outline-none focus:border-primary/50 transition-colors'
+                    className='w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition-colors'
                     placeholder='Project inquiry'
                   />
                 </div>
@@ -138,7 +138,7 @@ export function Contact() {
                   <textarea
                     id='message'
                     rows={5}
-                    className='w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-foreground placeholder:text-muted focus:outline-none focus:border-primary/50 transition-colors resize-none'
+                    className='w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition-colors resize-none'
                     placeholder='Tell me about your project...'
                   />
                 </div>
