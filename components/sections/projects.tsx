@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { ExternalLink, Github, Sparkles, ArrowUpRight, Layers, Globe, Cpu } from 'lucide-react'
 import { useRef, useState } from 'react'
+import Image from 'next/image'
 
 const projects = [
   {
@@ -15,6 +16,7 @@ const projects = [
     liveUrl: 'https://nft-ai-gen-pearl.vercel.app/',
     githubUrl: '#',
     icon: Globe,
+    image: '/projects/art-flow.png',
     gradient: 'from-violet-600 via-purple-600 to-indigo-600',
     shadowColor: 'shadow-purple-500/20',
     stats: { users: '100+', transactions: '10k+', chains: '1' },
@@ -193,11 +195,23 @@ function FeaturedProjectCard({ project, index }: { project: (typeof projects)[0]
               </div>
 
               {/* Preview content */}
-              <div
-                className={`mt-8 h-full rounded-xl bg-gradient-to-br ${project.gradient} opacity-20 flex items-center justify-center`}
-              >
-                <project.icon className='w-20 h-20 text-foreground/30' />
-              </div>
+              {project.image ? (
+                <div className='mt-8 h-full rounded-xl overflow-hidden relative'>
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    fill
+                    className='object-cover object-top'
+                    sizes='(max-width: 768px) 100vw, 50vw'
+                  />
+                </div>
+              ) : (
+                <div
+                  className={`mt-8 h-full rounded-xl bg-gradient-to-br ${project.gradient} opacity-20 flex items-center justify-center`}
+                >
+                  <project.icon className='w-20 h-20 text-foreground/30' />
+                </div>
+              )}
 
               {/* Floating stats */}
               <div className='absolute bottom-4 left-4 right-4 flex justify-between'>
