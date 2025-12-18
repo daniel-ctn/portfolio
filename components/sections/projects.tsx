@@ -7,27 +7,23 @@ import { useRef, useState } from 'react'
 
 const projects = [
   {
-    title: 'Web3 Ecosystem Platform',
-    subtitle: 'Decentralized Future',
+    title: 'Art Flow',
+    subtitle: 'AI Art Generator',
     description:
-      'A comprehensive decentralized platform connecting DeFi, NFT marketplace, and DAO governance into one seamless ecosystem.',
-    longDescription:
-      'Built from the ground up to handle millions of transactions. Features include wallet integration, real-time data feeds, and cross-chain compatibility.',
-    technologies: ['React', 'TypeScript', 'Web3.js', 'Ethers.js', 'TailwindCSS', 'GraphQL'],
-    liveUrl: '#',
+      'ArtFlow — An AI-powered NFT creation platform where users describe their vision, and Google Gemini AI generates unique artwork infused with Feng Shui elements. Features NFT minting, elemental fusion mechanics, and a built-in marketplace',
+    technologies: ['Next.js', 'TypeScript', 'Wagmi', 'Vercel AI SDK', 'Gemini', 'TailwindCSS', 'Prisma', 'Supabase'],
+    liveUrl: 'https://nft-ai-gen-pearl.vercel.app/',
     githubUrl: '#',
     icon: Globe,
     gradient: 'from-violet-600 via-purple-600 to-indigo-600',
     shadowColor: 'shadow-purple-500/20',
-    stats: { users: '10K+', transactions: '1M+', chains: '7' },
+    stats: { users: '100+', transactions: '10k+', chains: '1' },
   },
   {
     title: 'AI Code Assistant',
     subtitle: 'Intelligent Development',
     description:
       'An AI-powered development tool that helps write, review, and optimize code with seamless IDE integration.',
-    longDescription:
-      'Leveraging cutting-edge language models to provide context-aware suggestions and automated code improvements.',
     technologies: ['Next.js', 'OpenAI API', 'TypeScript', 'Tailwind', 'Prisma'],
     liveUrl: null,
     githubUrl: null,
@@ -42,7 +38,6 @@ const projects = [
     subtitle: 'Digital Collectibles',
     description:
       'A sleek marketplace for trading digital collectibles with lazy minting, auctions, and social features.',
-    longDescription: 'Supporting multiple file formats, royalty splits, and collection management for creators.',
     technologies: ['React', 'Solidity', 'IPFS', 'Web3.js', 'Chakra UI'],
     liveUrl: '#',
     githubUrl: '#',
