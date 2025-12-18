@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { ExternalLink, Github, Sparkles, ArrowUpRight, Layers, Globe, Cpu } from 'lucide-react'
+import { ExternalLink, Github, Sparkles, ArrowUpRight, Layers, Palette, Cpu } from 'lucide-react'
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 
@@ -12,10 +12,20 @@ const projects = [
     subtitle: 'AI Art Generator',
     description:
       'ArtFlow — An AI-powered NFT creation platform where users describe their vision, and Google Gemini AI generates unique artwork infused with Feng Shui elements. Features NFT minting, elemental fusion mechanics, and a built-in marketplace',
-    technologies: ['Next.js', 'TypeScript', 'Wagmi', 'Vercel AI SDK', 'Gemini', 'TailwindCSS', 'Prisma', 'Supabase'],
+    technologies: [
+      'Next.js',
+      'TypeScript',
+      'Wagmi',
+      'Vercel AI SDK',
+      'Gemini',
+      'TailwindCSS',
+      'Prisma',
+      'Supabase',
+      'Pinata',
+    ],
     liveUrl: 'https://nft-ai-gen-pearl.vercel.app/',
     githubUrl: '#',
-    icon: Globe,
+    icon: Palette,
     image: '/projects/art-flow.png',
     gradient: 'from-violet-600 via-purple-600 to-indigo-600',
     shadowColor: 'shadow-purple-500/20',
