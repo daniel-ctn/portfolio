@@ -26,7 +26,7 @@ const projects = [
     liveUrl: 'https://nft-ai-gen-pearl.vercel.app/',
     githubUrl: '#',
     icon: Palette,
-    image: '/projects/art-flow.png',
+    image: '/projects/art-flow-2.png',
     gradient: 'from-violet-600 via-purple-600 to-indigo-600',
     shadowColor: 'shadow-purple-500/20',
     stats: { users: '100+', transactions: '10k+', chains: '1' },
