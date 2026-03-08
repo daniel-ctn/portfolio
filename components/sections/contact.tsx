@@ -1,11 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Mail, MapPin, Send, Github, Linkedin, CheckCircle, X } from 'lucide-react'
+import { ArrowUpRight, CheckCircle, Github, Linkedin, Mail, MapPin, Send, X } from 'lucide-react'
 
 const contactInfo = [
   {
@@ -73,73 +71,104 @@ export function Contact() {
   const isFormValid = formData.name && formData.email && formData.subject && formData.message
 
   return (
-    <section id='contact' className='relative py-24'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <SectionHeading title='Get In Touch' subtitle="Have a project in mind? Let's work together!" />
-
-        <div className='grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto'>
-          {/* Contact Info */}
+    <section id='contact' className='relative'>
+      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <div className='grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start'>
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className='space-y-8'
+            viewport={{ once: true, margin: '-100px' }}
           >
-            <div>
-              <h3 className='text-2xl font-bold mb-4'>Let&apos;s Connect</h3>
-              <p className='text-muted leading-relaxed'>
-                I&apos;m always interested in hearing about new projects and opportunities. Whether you have a question
-                or just want to say hi, feel free to reach out!
-              </p>
-            </div>
+            <SectionHeading
+              align='left'
+              className='mb-0'
+              title='Start a Conversation'
+              subtitle='If you have a product idea, platform, or interface that needs a stronger frontend presence, let&apos;s talk.'
+            />
 
-            <div className='space-y-4'>
+            <p className='mt-8 max-w-xl text-base leading-relaxed text-foreground-soft md:text-lg'>
+              I&apos;m interested in projects where product quality matters, especially when the goal is to make the
+              experience feel sharper, more modern, and more intentional than the typical template-driven solution.
+            </p>
+
+            <motion.a
+              href='mailto:danielnguyen5201@gmail.com'
+              className='mt-8 inline-flex items-center gap-2 rounded-2xl border border-primary/30 bg-linear-to-r from-primary to-primary-light px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-primary/20'
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Email me directly
+              <ArrowUpRight className='h-4 w-4' />
+            </motion.a>
+
+            <div className='mt-8 space-y-3'>
               {contactInfo.map((item) => (
-                <motion.div key={item.label} className='flex items-center gap-4' whileHover={{ x: 5 }}>
-                  <div className='w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center'>
-                    <item.icon className='w-5 h-5 text-primary' />
-                  </div>
-                  <div>
-                    <p className='text-sm text-muted'>{item.label}</p>
-                    {item.href ? (
-                      <a href={item.href} className='text-foreground hover:text-primary transition-colors'>
-                        {item.value}
-                      </a>
-                    ) : (
-                      <p className='text-foreground'>{item.value}</p>
-                    )}
+                <motion.div
+                  key={item.label}
+                  className='flex items-center justify-between rounded-2xl border border-card-border bg-background/38 px-4 py-4'
+                  whileHover={{ x: 4 }}
+                >
+                  <div className='flex items-center gap-4'>
+                    <div className='flex h-12 w-12 items-center justify-center rounded-2xl border border-card-border bg-background-alt/70'>
+                      <item.icon className='h-5 w-5 text-primary' />
+                    </div>
+                    <div>
+                      <p className='text-[0.66rem] uppercase tracking-[0.22em] text-muted'>{item.label}</p>
+                      {item.href ? (
+                        <a href={item.href} className='mt-1 block text-sm font-medium text-foreground hover:text-primary'>
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className='mt-1 text-sm font-medium text-foreground'>{item.value}</p>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            <div>
-              <p className='text-sm text-muted mb-4'>Find me on</p>
-              <div className='flex gap-3'>
-                {socialLinks.map((social) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='w-12 h-12 rounded-xl glass-card flex items-center justify-center text-muted hover:text-foreground hover:bg-card transition-all'
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <social.icon className='w-5 h-5' />
-                  </motion.a>
-                ))}
-              </div>
+            <div className='mt-4 grid gap-3 sm:grid-cols-2'>
+              {socialLinks.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='flex items-center justify-between rounded-2xl border border-card-border bg-background/38 px-4 py-4 text-foreground transition-colors hover:border-frame-border'
+                  whileHover={{ x: 4 }}
+                >
+                  <div className='flex items-center gap-3'>
+                    <div className='flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/3'>
+                      <social.icon className='h-4 w-4' />
+                    </div>
+                    <span className='text-sm font-semibold uppercase tracking-[0.14em]'>{social.label}</span>
+                  </div>
+                  <ArrowUpRight className='h-4 w-4 text-muted' />
+                </motion.a>
+              ))}
             </div>
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <Card variant='gradient'>
-              <form className='space-y-6' onSubmit={handleSubmit}>
-                <div className='grid sm:grid-cols-2 gap-4'>
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <div className='rounded-3xl border border-frame-border bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.2)] md:p-6'>
+              <div className='flex items-center justify-between gap-4 border-b border-card-border pb-4'>
+                <div>
+                  <p className='text-[0.66rem] uppercase tracking-[0.22em] text-muted'>Project inquiry</p>
+                  <h3 className='mt-2 font-display text-4xl leading-none text-foreground'>Send a brief</h3>
+                </div>
+                <div className='rounded-2xl border border-primary/20 bg-primary/10 px-3 py-2 text-[0.66rem] uppercase tracking-[0.18em] text-primary'>
+                  Response-friendly
+                </div>
+              </div>
+
+              <form className='mt-6 space-y-5' onSubmit={handleSubmit}>
+                <div className='grid gap-4 sm:grid-cols-2'>
                   <div>
-                    <label htmlFor='name' className='block text-sm font-medium mb-2'>
+                    <label htmlFor='name' className='mb-2 block text-[0.68rem] uppercase tracking-[0.2em] text-muted'>
                       Name
                     </label>
                     <input
@@ -147,13 +176,13 @@ export function Contact() {
                       id='name'
                       value={formData.name}
                       onChange={handleChange}
-                      className='w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition-colors'
+                      className='w-full rounded-2xl border border-card-border bg-background-alt/70 px-4 py-3 text-foreground placeholder:text-muted focus:border-primary focus:outline-none'
                       placeholder='Your name'
                       required
                     />
                   </div>
                   <div>
-                    <label htmlFor='email' className='block text-sm font-medium mb-2'>
+                    <label htmlFor='email' className='mb-2 block text-[0.68rem] uppercase tracking-[0.2em] text-muted'>
                       Email
                     </label>
                     <input
@@ -161,14 +190,15 @@ export function Contact() {
                       id='email'
                       value={formData.email}
                       onChange={handleChange}
-                      className='w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition-colors'
+                      className='w-full rounded-2xl border border-card-border bg-background-alt/70 px-4 py-3 text-foreground placeholder:text-muted focus:border-primary focus:outline-none'
                       placeholder='your@email.com'
                       required
                     />
                   </div>
                 </div>
+
                 <div>
-                  <label htmlFor='subject' className='block text-sm font-medium mb-2'>
+                  <label htmlFor='subject' className='mb-2 block text-[0.68rem] uppercase tracking-[0.2em] text-muted'>
                     Subject
                   </label>
                   <input
@@ -176,44 +206,52 @@ export function Contact() {
                     id='subject'
                     value={formData.subject}
                     onChange={handleChange}
-                    className='w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition-colors'
-                    placeholder='Project inquiry'
+                    className='w-full rounded-2xl border border-card-border bg-background-alt/70 px-4 py-3 text-foreground placeholder:text-muted focus:border-primary focus:outline-none'
+                    placeholder='What are you building?'
                     required
                   />
                 </div>
+
                 <div>
-                  <label htmlFor='message' className='block text-sm font-medium mb-2'>
+                  <label htmlFor='message' className='mb-2 block text-[0.68rem] uppercase tracking-[0.2em] text-muted'>
                     Message
                   </label>
                   <textarea
                     id='message'
-                    rows={5}
+                    rows={6}
                     value={formData.message}
                     onChange={handleChange}
-                    className='w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition-colors resize-none'
-                    placeholder='Tell me about your project...'
+                    className='w-full resize-none rounded-2xl border border-card-border bg-background-alt/70 px-4 py-3 text-foreground placeholder:text-muted focus:border-primary focus:outline-none'
+                    placeholder='Tell me about the product, the stage you are in, and what kind of frontend help you need.'
                     required
                   />
                 </div>
-                <Button type='submit' className='w-full' size='lg' disabled={!isFormValid || isSubmitting}>
+
+                <motion.button
+                  type='submit'
+                  className='inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-primary/30 bg-linear-to-r from-primary to-primary-light px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-primary/20 disabled:cursor-not-allowed disabled:opacity-60'
+                  whileHover={{ y: isFormValid && !isSubmitting ? -3 : 0 }}
+                  whileTap={{ scale: isFormValid && !isSubmitting ? 0.98 : 1 }}
+                  disabled={!isFormValid || isSubmitting}
+                >
                   {isSubmitting ? (
                     <>
                       <motion.div
-                        className='w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2'
+                        className='h-4 w-4 rounded-full border-2 border-background border-t-transparent'
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                       />
-                      Sending...
+                      Sending
                     </>
                   ) : (
                     <>
-                      <Send className='w-4 h-4 mr-2' />
-                      Send Message
+                      <Send className='h-4 w-4' />
+                      Send message
                     </>
                   )}
-                </Button>
+                </motion.button>
               </form>
-            </Card>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -227,7 +265,7 @@ export function Contact() {
             exit={{ opacity: 0, y: 50, x: '-50%' }}
             className='fixed bottom-8 left-1/2 z-50'
           >
-            <div className='flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-r from-secondary to-cyan-500 text-white shadow-2xl shadow-secondary/30'>
+            <div className='flex items-center gap-4 rounded-2xl bg-linear-to-r from-primary to-secondary px-6 py-4 text-white shadow-2xl shadow-primary/30'>
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -237,7 +275,7 @@ export function Contact() {
               </motion.div>
               <div>
                 <p className='font-semibold'>Message sent successfully!</p>
-                <p className='text-sm text-white/80'>Thank you for reaching out. I'll get back to you soon!</p>
+                <p className='text-sm text-white/80'>Thank you for reaching out. I&apos;ll get back to you soon!</p>
               </div>
               <button
                 onClick={() => setShowSuccess(false)}

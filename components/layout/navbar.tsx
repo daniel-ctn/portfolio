@@ -22,88 +22,99 @@ export function Navbar() {
   const { scrollY } = useScroll()
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    setIsScrolled(latest > 50)
+    setIsScrolled(latest > 24)
   })
 
   return (
     <motion.header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled ? 'bg-background/80 backdrop-blur-xl' : 'bg-transparent'
-      )}
+      className='fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8'
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <nav className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex items-center justify-between h-16 md:h-20'>
-          {/* Logo */}
-          <Link href='/' className='flex items-center gap-2'>
+      <nav
+        className={cn(
+          'mx-auto max-w-7xl rounded-[1.75rem] border px-4 py-3 transition-all duration-300 md:px-6',
+          isScrolled
+            ? 'border-frame-border bg-background/78 shadow-[0_20px_60px_rgba(0,0,0,0.28)] backdrop-blur-2xl'
+            : 'border-white/8 bg-white/3 backdrop-blur-xl'
+        )}
+      >
+        <div className='flex items-center justify-between gap-4'>
+          <Link href='/' className='flex min-w-0 items-center gap-3'>
             <motion.div
-              className='w-10 h-10 rounded-xl overflow-hidden'
+              className='overflow-hidden rounded-2xl border border-white/10 bg-white/3 p-1'
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
               <Image
                 src='/daniel-chibi.jpg'
                 alt='Daniel Nguyen'
-                width={40}
-                height={40}
-                className='w-full h-full object-cover'
+                width={44}
+                height={44}
+                className='h-11 w-11 rounded-xl object-cover'
               />
             </motion.div>
-            <span className='font-semibold text-lg hidden sm:block'>
-              daniel<span className='text-primary'>.</span>dev
-            </span>
+            <div className='min-w-0'>
+              <p className='hidden text-[0.65rem] uppercase tracking-[0.28em] text-muted sm:block'>Digital atelier</p>
+              <p className='hidden truncate font-display text-2xl leading-none text-foreground sm:block'>Daniel Nguyen</p>
+              <p className='text-sm font-semibold uppercase tracking-[0.24em] text-foreground sm:hidden'>DN</p>
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className='hidden md:flex items-center gap-1'>
+          <div className='hidden items-center gap-2 rounded-full border border-card-border bg-background-alt/60 px-2 py-2 lg:flex'>
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.name}
                 href={link.href}
-                className='px-4 py-2 text-sm font-medium text-muted hover:text-foreground transition-colors link-hover'
+                className='rounded-full px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-muted transition-colors hover:text-foreground'
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.08 }}
               >
                 {link.name}
               </motion.a>
             ))}
+          </div>
+
+          <div className='hidden items-center gap-3 lg:flex'>
             <ThemeToggle />
             <motion.a
               href='#contact'
-              className='ml-4 px-5 py-2 text-sm font-medium bg-gradient-to-r from-primary to-primary-light text-white rounded-full hover:shadow-lg hover:shadow-primary/30 transition-all'
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className='rounded-full border border-primary/30 bg-linear-to-r from-primary to-primary-light px-5 py-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-white shadow-lg shadow-primary/20'
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              Hire Me
+              Start a project
             </motion.a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className='md:hidden flex items-center gap-2'>
+          <div className='flex items-center gap-2 lg:hidden'>
             <ThemeToggle />
-            <button className='p-2 text-foreground' onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            <button
+              className='rounded-2xl border border-card-border bg-background-alt/60 p-2 text-foreground'
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+            >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         <motion.div
-          className={cn('md:hidden overflow-hidden', isMobileMenuOpen ? 'block' : 'hidden')}
+          className={cn(
+            'overflow-hidden lg:hidden',
+            isMobileMenuOpen ? 'mt-4 block border-t border-card-border/80 pt-4' : 'hidden'
+          )}
           initial={{ height: 0 }}
           animate={{ height: isMobileMenuOpen ? 'auto' : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className='py-4 space-y-2'>
+          <div className='space-y-2 pb-2'>
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className='block px-4 py-3 text-muted hover:text-foreground hover:bg-card rounded-lg transition-colors'
+                className='block rounded-[1.2rem] border border-card-border bg-background-alt/60 px-4 py-3 text-sm font-medium uppercase tracking-[0.18em] text-muted transition-colors hover:text-foreground'
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
@@ -111,10 +122,10 @@ export function Navbar() {
             ))}
             <a
               href='#contact'
-              className='block px-4 py-3 text-center bg-gradient-to-r from-primary to-primary-light text-white rounded-lg mt-4'
+              className='mt-4 block rounded-[1.2rem] border border-primary/30 bg-linear-to-r from-primary to-primary-light px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] text-white'
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Hire Me
+              Start a project
             </a>
           </div>
         </motion.div>

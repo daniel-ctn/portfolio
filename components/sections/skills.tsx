@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { Card } from '@/components/ui/card'
-import { Code2, Blocks, Wrench, GraduationCap } from 'lucide-react'
+import { Blocks, Code2, GraduationCap, Wrench } from 'lucide-react'
 
 const skillCategories = [
   {
@@ -32,157 +31,96 @@ const skillCategories = [
     title: 'Tools & Libraries',
     icon: Wrench,
     color: 'accent',
-    skills: ['Git', 'GitHub Actions', 'TanStack Query', 'Redux', 'Zustand', 'GraphQL', 'REST APIs', 'Jest', 'Cypress'],
+    skills: ['Git', 'GitHub Actions', 'TanStack Query', 'Redux', 'Zustand', 'GraphQL', 'REST APIs', 'Jest', 'AI Workflows'],
   },
   {
     title: 'Currently Learning',
     icon: GraduationCap,
     color: 'muted',
-    skills: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'AI/ML APIs', 'Python'],
+    skills: ['Python', 'PostgreSQL', 'Agentic Systems', 'Realtime Data Apps', 'Backend Foundations', 'AI/ML APIs'],
   },
 ]
 
-// All skills for marquee
-const allSkills = [
-  'React',
-  'Next.js',
-  'TypeScript',
-  'Web3.js',
-  'Ethers.js',
-  'TailwindCSS',
-  'Framer Motion',
-  'GraphQL',
-  'Node.js',
-  'PostgreSQL',
-  'Docker',
-  'AWS',
-  'Vue.js',
-  'Redux',
-  'Jest',
-  'Cypress',
-  'Git',
-  'Figma',
-]
-
-function Marquee({ children, direction = 1 }: { children: React.ReactNode; direction?: number }) {
-  return (
-    <div className='flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]'>
-      <motion.div
-        className='flex gap-4 pr-4'
-        animate={{ x: direction > 0 ? [0, -1920] : [-1920, 0] }}
-        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-      >
-        {children}
-        {children}
-      </motion.div>
-    </div>
-  )
-}
+const coreStack = ['Next.js', 'React', 'TypeScript', 'TailwindCSS', 'Framer Motion', 'GraphQL', 'Web3', 'AI Workflows']
 
 export function Skills() {
   return (
-    <section id='skills' className='relative py-24 overflow-hidden'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <SectionHeading title='Skills & Expertise' subtitle='Technologies I work with daily and areas I explore' />
+    <section id='skills' className='relative overflow-hidden'>
+      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <div className='grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start'>
+          <div>
+            <SectionHeading
+              align='left'
+              className='mb-0'
+              title='Capabilities & Tools'
+              subtitle='My current stack, the AI-assisted workflows I use every day, and the areas I am actively expanding into.'
+            />
 
-        {/* Skill Marquee */}
-        <div className='mb-16 space-y-4'>
-          <Marquee direction={1}>
-            {allSkills.map((skill) => (
-              <div
-                key={skill}
-                className='px-6 py-3 rounded-full glass-card text-foreground font-medium whitespace-nowrap hover:border-primary transition-colors'
-              >
-                {skill}
-              </div>
-            ))}
-          </Marquee>
-          <Marquee direction={-1}>
-            {allSkills.reverse().map((skill) => (
-              <div
-                key={skill}
-                className='px-6 py-3 rounded-full glass-card text-foreground font-medium whitespace-nowrap hover:border-primary transition-colors'
-              >
-                {skill}
-              </div>
-            ))}
-          </Marquee>
+            <p className='mt-8 max-w-xl text-base leading-relaxed text-foreground-soft md:text-lg'>
+              I still consider frontend engineering my strongest foundation, but I&apos;m intentionally broadening my range
+              with AI-native workflows, Python, PostgreSQL, and the technical knowledge that will matter more in the
+              AI era.
+            </p>
+
+            <div className='mt-8 flex flex-wrap gap-2'>
+              {coreStack.map((skill) => (
+                <span key={skill} className='tech-tag'>
+                  {skill}
+                </span>
+              ))}
+            </div>
+
+            <div className='mt-8 rounded-2xl border border-card-border bg-background/38 px-5 py-5'>
+              <p className='text-[0.68rem] uppercase tracking-[0.22em] text-muted'>How I work with tools</p>
+              <p className='mt-3 text-sm leading-relaxed text-foreground-soft md:text-base'>
+                I use AI not only to ship faster, but also to learn faster. A big part of my current workflow is
+                figuring out how to use AI more efficiently for coding, research, and knowledge expansion.
+              </p>
+            </div>
+          </div>
+
+          <div className='grid gap-4 md:grid-cols-2'>
+            {skillCategories.map((category, index) => {
+              const toneClasses =
+                category.color === 'primary'
+                  ? 'border-primary/20 bg-primary/10 text-primary'
+                  : category.color === 'secondary'
+                    ? 'border-secondary/20 bg-secondary/10 text-secondary'
+                    : category.color === 'accent'
+                      ? 'border-accent/20 bg-accent/10 text-accent'
+                      : 'border-card-border bg-background-alt/70 text-foreground'
+
+              return (
+                <motion.div
+                  key={category.title}
+                  className='rounded-2xl border border-card-border bg-background/38 px-5 py-5 shadow-[0_20px_60px_rgba(0,0,0,0.14)]'
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ delay: index * 0.08 }}
+                >
+                  <div className='flex items-center gap-4'>
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${toneClasses}`}>
+                      <category.icon className='h-5 w-5' />
+                    </div>
+                    <div>
+                      <p className='text-[0.66rem] uppercase tracking-[0.22em] text-muted'>Category</p>
+                      <h3 className='text-xl font-semibold text-foreground'>{category.title}</h3>
+                    </div>
+                  </div>
+
+                  <div className='mt-5 flex flex-wrap gap-2'>
+                    {category.skills.map((skill) => (
+                      <span key={skill} className='tech-tag'>
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
         </div>
-
-        {/* Skill Categories */}
-        <motion.div
-          className='grid md:grid-cols-2 gap-6'
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          {skillCategories.map((category, catIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, x: catIndex % 2 === 0 ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: catIndex * 0.1 }}
-            >
-              <Card variant='gradient' className='h-full group'>
-                <div className='flex items-center gap-4 mb-6'>
-                  <motion.div
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                      category.color === 'primary'
-                        ? 'bg-primary/20'
-                        : category.color === 'secondary'
-                          ? 'bg-secondary/20'
-                          : category.color === 'accent'
-                            ? 'bg-accent/20'
-                            : 'bg-muted/20'
-                    }`}
-                    whileHover={{ rotate: 10, scale: 1.1 }}
-                  >
-                    <category.icon
-                      className={`w-6 h-6 ${
-                        category.color === 'primary'
-                          ? 'text-primary'
-                          : category.color === 'secondary'
-                            ? 'text-secondary'
-                            : category.color === 'accent'
-                              ? 'text-accent'
-                              : 'text-muted'
-                      }`}
-                    />
-                  </motion.div>
-                  <h3
-                    className={`text-xl font-bold ${
-                      category.color === 'primary'
-                        ? 'text-primary'
-                        : category.color === 'secondary'
-                          ? 'text-secondary'
-                          : category.color === 'accent'
-                            ? 'text-accent'
-                            : 'text-muted'
-                    }`}
-                  >
-                    {category.title}
-                  </h3>
-                </div>
-                <div className='flex flex-wrap gap-2'>
-                  {category.skills.map((skill, index) => (
-                    <motion.span
-                      key={skill}
-                      className='tech-tag'
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + index * 0.05 }}
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   )

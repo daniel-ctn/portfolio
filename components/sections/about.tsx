@@ -2,153 +2,128 @@
 
 import { motion } from 'framer-motion'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { Code2, Rocket, Brain, Heart, MapPin, Calendar, Coffee, Zap } from 'lucide-react'
+import { Brain, Calendar, Code2, MapPin, Rocket, Sparkles } from 'lucide-react'
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
+const strengths = [
+  {
+    icon: Code2,
+    title: 'AI product building',
+    description: 'I use AI to help turn ideas into real product experiences, not just prototypes or one-off experiments.',
   },
-}
+  {
+    icon: Rocket,
+    title: 'Agentic engineer path',
+    description: 'My current direction is learning how to leverage AI more deeply across research, implementation, and iteration.',
+  },
+  {
+    icon: Brain,
+    title: 'Continuous learning',
+    description: 'I use AI to accelerate my learning in Python, PostgreSQL, and the skills needed for the AI-era industry.',
+  },
+]
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-}
+const profileFacts = [
+  { label: 'Base', value: 'Ho Chi Minh City' },
+  { label: 'Experience', value: 'Since 2017' },
+  { label: 'Direction', value: 'Agentic engineering' },
+]
 
 export function About() {
   return (
-    <section id='about' className='relative py-24'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <SectionHeading title='About Me' subtitle='A glimpse into who I am and what drives me' />
+    <section id='about' className='relative'>
+      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <div className='grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start'>
+          <div>
+            <SectionHeading
+              align='left'
+              className='mb-0'
+              title='About'
+              subtitle='A senior frontend developer using AI to build real products, learn faster, and move toward the path of an agentic engineer.'
+            />
 
-        {/* Bento Grid Layout */}
-        <motion.div
-          className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[180px]'
-          variants={containerVariants}
-          initial='hidden'
-          whileInView='visible'
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          {/* Main intro - spans 2 cols and 2 rows */}
-          <motion.div
-            variants={itemVariants}
-            className='md:col-span-2 md:row-span-2 gradient-border p-6 flex flex-col justify-between group hover:scale-[1.02] transition-transform'
-          >
-            <div>
-              <h3 className='text-2xl font-bold mb-4 gradient-text'>Hello there! 👋</h3>
-              <p className='text-muted leading-relaxed'>
-                I'm <span className='text-foreground font-semibold'>Daniel Nguyen</span>, a Senior Frontend Developer
-                with a passion for crafting exceptional digital experiences. With nearly{' '}
-                <span className='text-primary font-semibold'>9 years</span> of experience, I've had the privilege of
-                working on diverse projects that have shaped my expertise.
+            <div className='mt-8 space-y-5 text-base leading-relaxed text-foreground-soft md:text-lg'>
+              <p>
+                I&apos;m Daniel Nguyen, a senior frontend developer currently focused on leveraging AI more deeply in my
+                work so I can grow toward the path of an agentic engineer.
               </p>
-              <p className='text-muted leading-relaxed mt-4'>
-                In the last 3 years, I've been deeply immersed in the{' '}
-                <span className='text-primary'>Web3 ecosystem</span>, building platforms that connect multiple products
-                into cohesive experiences.
+              <p>
+                I like using AI to build real products. One product I completed uses AI to generate NFT images that
+                users can mint on-chain. I&apos;m also starting work on a real-time stock chart app where AI analyzes live
+                market data and gives users suggestions in real time.
+              </p>
+              <p>
+                I also use AI to learn and expand my knowledge. Right now I&apos;m studying Python, PostgreSQL, and related
+                areas while researching how to work with AI more efficiently and prepare myself for an AI-era industry.
               </p>
             </div>
-            <div className='flex items-center gap-4 text-sm text-muted mt-4'>
-              <span className='flex items-center gap-1'>
-                <MapPin className='w-4 h-4' />
-                Ho Chi Minh City
-              </span>
-              <span className='flex items-center gap-1'>
-                <Calendar className='w-4 h-4' />
-                Since 2017
-              </span>
-            </div>
-          </motion.div>
 
-          {/* Frontend Expert */}
-          <motion.div
-            variants={itemVariants}
-            className='glass-card p-6 flex flex-col justify-between group hover:bg-primary/5 transition-colors'
-          >
-            <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary-light/20 flex items-center justify-center group-hover:scale-110 transition-transform'>
-              <Code2 className='w-6 h-6 text-primary' />
+            <div className='mt-8 rounded-2xl border border-card-border bg-background/35 px-5 py-5'>
+              <p className='text-[0.68rem] uppercase tracking-[0.24em] text-muted'>Working direction</p>
+              <p className='mt-3 max-w-xl text-sm leading-relaxed text-foreground-soft md:text-base'>
+                My goal is to combine strong frontend fundamentals with AI-native workflows, so I can move beyond
+                traditional frontend delivery and become the kind of engineer who can learn, build, and iterate faster
+                with AI as a real working partner.
+              </p>
             </div>
-            <div>
-              <h4 className='font-bold text-foreground'>Frontend Expert</h4>
-              <p className='text-sm text-muted'>React, Next.js, TypeScript</p>
-            </div>
-          </motion.div>
+          </div>
 
-          {/* Web3 Pioneer */}
           <motion.div
-            variants={itemVariants}
-            className='glass-card p-6 flex flex-col justify-between group hover:bg-secondary/5 transition-colors'
+            className='rounded-3xl border border-frame-border bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.2)]'
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
           >
-            <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-secondary/20 to-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform'>
-              <Rocket className='w-6 h-6 text-secondary' />
+            <div className='flex items-center gap-3'>
+              <div className='flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10'>
+                <Sparkles className='h-5 w-5 text-primary' />
+              </div>
+              <div>
+                <p className='text-[0.66rem] uppercase tracking-[0.22em] text-muted'>Profile snapshot</p>
+                <p className='text-lg font-semibold text-foreground'>What defines my work</p>
+              </div>
             </div>
-            <div>
-              <h4 className='font-bold text-foreground'>Web3 Pioneer</h4>
-              <p className='text-sm text-muted'>3+ years in blockchain</p>
-            </div>
-          </motion.div>
 
-          {/* AI Enthusiast - spans 2 cols */}
-          <motion.div
-            variants={itemVariants}
-            className='md:col-span-2 glass-card p-6 flex items-center gap-6 group hover:bg-accent/5 transition-colors'
-          >
-            <div className='w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-orange-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform'>
-              <Brain className='w-8 h-8 text-accent' />
+            <div className='mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-1'>
+              {profileFacts.map((fact) => (
+                <div key={fact.label} className='rounded-2xl border border-card-border bg-background-alt/70 px-4 py-4'>
+                  <p className='text-[0.66rem] uppercase tracking-[0.22em] text-muted'>{fact.label}</p>
+                  <p className='mt-2 text-sm font-medium text-foreground'>{fact.value}</p>
+                </div>
+              ))}
             </div>
-            <div>
-              <h4 className='font-bold text-foreground text-lg'>AI Enthusiast</h4>
-              <p className='text-muted'>
-                I use AI daily to enhance productivity and have plans to build AI-first projects that push the
-                boundaries of what's possible.
+
+            <div className='mt-4 rounded-2xl border border-card-border bg-background-alt/70 px-4 py-4'>
+              <div className='flex items-center gap-3'>
+                <MapPin className='h-5 w-5 text-secondary' />
+                <Calendar className='h-5 w-5 text-primary' />
+              </div>
+              <p className='mt-3 text-sm leading-relaxed text-foreground-soft'>
+                Based in Vietnam, working remotely, and ready to collaborate on products that take AI seriously as part
+                of the future of software.
               </p>
             </div>
           </motion.div>
+        </div>
 
-          {/* Lifelong Learner */}
-          <motion.div
-            variants={itemVariants}
-            className='glass-card p-6 flex flex-col justify-between group hover:bg-primary/5 transition-colors'
-          >
-            <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform'>
-              <Heart className='w-6 h-6 text-primary' />
-            </div>
-            <div>
-              <h4 className='font-bold text-foreground'>Lifelong Learner</h4>
-              <p className='text-sm text-muted'>Backend, Cloud, Databases</p>
-            </div>
-          </motion.div>
-
-          {/* Fun fact */}
-          <motion.div
-            variants={itemVariants}
-            className='glass-card p-6 flex flex-col justify-between bg-gradient-to-br from-primary/5 to-transparent'
-          >
-            <Coffee className='w-8 h-8 text-primary' />
-            <div>
-              <p className='text-3xl font-bold gradient-text'>∞</p>
-              <p className='text-sm text-muted'>Cups of coffee</p>
-            </div>
-          </motion.div>
-
-          {/* Currently */}
-          <motion.div variants={itemVariants} className='md:col-span-2 glass-card p-6 flex items-center gap-4 group'>
-            <div className='relative'>
-              <Zap className='w-8 h-8 text-secondary' />
-              <motion.div
-                className='absolute inset-0 rounded-full bg-secondary/20'
-                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </div>
-            <div>
-              <p className='text-sm text-muted'>Currently working on</p>
-              <p className='font-bold text-foreground'>Web3 Ecosystem Platform</p>
-            </div>
-          </motion.div>
-        </motion.div>
+        <div className='mt-10 grid gap-4 md:grid-cols-3'>
+          {strengths.map((strength, index) => (
+            <motion.div
+              key={strength.title}
+              className='rounded-2xl border border-card-border bg-background/38 px-5 py-5 shadow-[0_20px_60px_rgba(0,0,0,0.14)]'
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
+            >
+              <div className='flex h-12 w-12 items-center justify-center rounded-2xl border border-card-border bg-background-alt/70'>
+                <strength.icon className='h-5 w-5 text-foreground' />
+              </div>
+              <p className='mt-5 text-[0.68rem] uppercase tracking-[0.22em] text-muted'>Strength</p>
+              <h3 className='mt-2 text-xl font-semibold text-foreground'>{strength.title}</h3>
+              <p className='mt-3 text-sm leading-relaxed text-foreground-soft'>{strength.description}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )

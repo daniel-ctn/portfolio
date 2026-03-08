@@ -3,15 +3,17 @@
 import { motion } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/components/theme-provider'
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
+
+const emptySubscribe = () => () => {}
+
+function useHasMounted() {
+  return useSyncExternalStore(emptySubscribe, () => true, () => false)
+}
 
 export function ThemeToggle() {
-  const [mounted, setMounted] = useState(false)
   const { theme, toggleTheme } = useTheme()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useHasMounted()
 
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {

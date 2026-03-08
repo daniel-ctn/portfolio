@@ -1,9 +1,8 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { Briefcase, Calendar, MapPin, ArrowRight } from 'lucide-react'
-import { useRef } from 'react'
+import { ArrowRight, Briefcase, Calendar, MapPin } from 'lucide-react'
 
 const experiences = [
   {
@@ -43,127 +42,97 @@ const experiences = [
   },
 ]
 
-function ExperienceCard({ exp, index }: { exp: (typeof experiences)[0]; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start end', 'center center'],
-  })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 1])
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.95, 1])
-  const x = useTransform(scrollYProgress, [0, 0.5], [index % 2 === 0 ? -50 : 50, 0])
-
-  return (
-    <motion.div ref={cardRef} style={{ opacity, scale, x }} className='relative'>
-      {/* Connection line */}
-      {index < experiences.length - 1 && (
-        <div className='absolute left-8 top-20 bottom-0 w-px bg-gradient-to-b from-primary via-primary/50 to-transparent hidden md:block' />
-      )}
-
-      <div className='relative flex gap-6'>
-        {/* Timeline dot */}
-        <div className='hidden md:flex flex-col items-center'>
-          <motion.div
-            className={`w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 ${
-              exp.current ? 'bg-gradient-to-br from-primary to-primary-light' : 'glass-card'
-            }`}
-            whileHover={{ scale: 1.1, rotate: 5 }}
-          >
-            <Briefcase className={`w-6 h-6 ${exp.current ? 'text-white' : 'text-primary'}`} />
-          </motion.div>
-          {exp.current && (
-            <motion.div
-              className='absolute w-16 h-16 rounded-2xl bg-primary/30'
-              animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          )}
-        </div>
-
-        {/* Content */}
-        <div className='flex-1 glass-card p-6 group hover:border-primary transition-colors'>
-          {/* Header */}
-          <div className='flex flex-wrap items-start justify-between gap-4 mb-4'>
-            <div>
-              <div className='flex items-center gap-2 mb-1'>
-                <h3 className='text-xl font-bold text-foreground group-hover:text-primary transition-colors'>
-                  {exp.title}
-                </h3>
-                {exp.current && (
-                  <span className='px-2 py-0.5 text-xs font-medium bg-primary/20 text-primary rounded-full'>
-                    Current
-                  </span>
-                )}
-              </div>
-              <p className='text-primary font-medium'>{exp.company}</p>
-            </div>
-            <div className='flex flex-col items-end text-sm text-muted'>
-              <span className='flex items-center gap-1'>
-                <Calendar className='w-4 h-4' />
-                {exp.period}
-              </span>
-              <span className='flex items-center gap-1'>
-                <MapPin className='w-4 h-4' />
-                {exp.location}
-              </span>
-            </div>
-          </div>
-
-          {/* Description */}
-          <p className='text-muted mb-4'>{exp.description}</p>
-
-          {/* Highlights */}
-          <ul className='space-y-2 mb-4'>
-            {exp.highlights.map((highlight) => (
-              <li key={highlight} className='flex items-center gap-2 text-sm text-muted'>
-                <ArrowRight className='w-3 h-3 text-primary shrink-0' />
-                {highlight}
-              </li>
-            ))}
-          </ul>
-
-          {/* Technologies */}
-          <div className='flex flex-wrap gap-2'>
-            {exp.technologies.map((tech) => (
-              <span key={tech} className='tech-tag'>
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
 export function Experience() {
   return (
-    <section id='experience' className='relative py-24'>
-      <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <SectionHeading title='Experience' subtitle='My professional journey building exceptional web experiences' />
+    <section id='experience' className='relative'>
+      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <div className='grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start'>
+          <div>
+            <SectionHeading
+              align='left'
+              className='mb-0'
+              title='Experience'
+              subtitle='A track record of building and refining frontend experiences across product teams, clients, and Web3 platforms.'
+            />
 
-        <div className='space-y-12'>
-          {experiences.map((exp, index) => (
-            <ExperienceCard key={exp.company} exp={exp} index={index} />
-          ))}
-        </div>
-
-        {/* Years counter */}
-        <motion.div
-          className='mt-16 text-center'
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className='inline-flex items-center gap-4 px-8 py-4 rounded-2xl glass-card'>
-            <div className='text-5xl font-bold gradient-text'>9+</div>
-            <div className='text-left'>
-              <p className='text-foreground font-semibold'>Years of Experience</p>
-              <p className='text-sm text-muted'>Building for the web</p>
+            <div className='mt-8 rounded-2xl border border-card-border bg-background/38 px-5 py-5'>
+              <p className='text-[0.68rem] uppercase tracking-[0.22em] text-muted'>Career snapshot</p>
+              <p className='mt-3 font-display text-5xl leading-none text-foreground'>9+</p>
+              <p className='mt-3 text-sm leading-relaxed text-foreground-soft'>
+                Years of professional frontend experience, from early client delivery to leading complex platform work.
+              </p>
             </div>
           </div>
-        </motion.div>
+
+          <div className='space-y-4'>
+            {experiences.map((exp, index) => (
+              <motion.article
+                key={exp.company}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.55, delay: index * 0.08 }}
+                className='rounded-3xl border border-card-border bg-background/40 px-5 py-5 shadow-[0_20px_60px_rgba(0,0,0,0.14)] md:px-6 md:py-6'
+              >
+                <div className='grid gap-5 lg:grid-cols-[190px_minmax(0,1fr)]'>
+                  <div className='space-y-3'>
+                    <div className='flex items-center gap-3'>
+                      <div className='flex h-11 w-11 items-center justify-center rounded-2xl border border-card-border bg-background-alt/70'>
+                        <Briefcase className='h-5 w-5 text-primary' />
+                      </div>
+                      {exp.current && (
+                        <span className='rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-primary'>
+                          Current
+                        </span>
+                      )}
+                    </div>
+
+                    <div>
+                      <p className='text-[0.66rem] uppercase tracking-[0.22em] text-muted'>Period</p>
+                      <p className='mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-foreground'>{exp.period}</p>
+                    </div>
+
+                    <div className='space-y-2 text-sm text-foreground-soft'>
+                      <p className='flex items-center gap-2'>
+                        <Calendar className='h-4 w-4 text-muted' />
+                        {exp.period}
+                      </p>
+                      <p className='flex items-center gap-2'>
+                        <MapPin className='h-4 w-4 text-muted' />
+                        {exp.location}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className='text-sm font-semibold uppercase tracking-[0.16em] text-primary'>{exp.company}</p>
+                    <h3 className='mt-2 font-display text-4xl leading-[0.95] tracking-[-0.03em] text-foreground'>
+                      {exp.title}
+                    </h3>
+                    <p className='mt-4 text-base leading-relaxed text-foreground-soft'>{exp.description}</p>
+
+                    <div className='mt-5 grid gap-2'>
+                      {exp.highlights.map((highlight) => (
+                        <div key={highlight} className='flex items-start gap-3 text-sm text-foreground-soft'>
+                          <ArrowRight className='mt-0.5 h-4 w-4 shrink-0 text-primary' />
+                          <span>{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className='mt-6 flex flex-wrap gap-2'>
+                      {exp.technologies.map((tech) => (
+                        <span key={tech} className='tech-tag'>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
