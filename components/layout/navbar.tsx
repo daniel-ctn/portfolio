@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { ChibiLogo } from '@/components/ui/chibi-logo'
 
 const navLinks = [
   { name: 'Projects', href: '#projects' },
@@ -40,7 +41,8 @@ export function Navbar() {
         )}
       >
         <div className='flex items-center justify-between'>
-          <Link href='/' className='flex items-center gap-2'>
+          <Link href='/' className='flex items-center gap-2.5'>
+            <ChibiLogo size={34} />
             <span className='font-display text-xl text-foreground'>Daniel Nguyen</span>
           </Link>
 

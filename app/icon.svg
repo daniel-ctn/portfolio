@@ -1,0 +1,40 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="32" fill="#0A0A0A"/>
+
+  <!-- Face -->
+  <circle cx="32" cy="36" r="18" fill="#FDDCBD"/>
+
+  <!-- Hair -->
+  <path d="M14 30C14 19 22 12 32 12C42 12 50 19 50 30C50 30 48 25 43 23C43 23 45 17 40 14.5C40 14.5 36 17 32 15.5C28 17 24 14.5 24 14.5C19 17 21 23 21 23C16 25 14 30 14 30Z" fill="#8B4513"/>
+  <path d="M23 15C21 10 27 6 30 8C28 4 35 2 37 6.5C39 3 45 5 43 9.5C47 6 50 10 47 14C51 11 52 17 49 19" stroke="#8B4513" stroke-width="3.5" stroke-linecap="round" fill="#8B4513"/>
+  <path d="M17 23C15 18 19 14 23 15" stroke="#8B4513" stroke-width="2.5" stroke-linecap="round" fill="#8B4513"/>
+
+  <!-- Ears -->
+  <ellipse cx="14" cy="36" rx="2.5" ry="3.5" fill="#FDDCBD"/>
+  <ellipse cx="50" cy="36" rx="2.5" ry="3.5" fill="#FDDCBD"/>
+
+  <!-- Eyes -->
+  <ellipse cx="26" cy="36" rx="3.5" ry="4" fill="#5C3317"/>
+  <ellipse cx="38" cy="36" rx="3.5" ry="4" fill="#5C3317"/>
+  <circle cx="27.3" cy="34.5" r="1.3" fill="white"/>
+  <circle cx="39.3" cy="34.5" r="1.3" fill="white"/>
+
+  <!-- Eyebrows -->
+  <path d="M22 30.5C23 29 26 28.5 28.5 29.5" stroke="#5C3317" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M35.5 29.5C38 28.5 41 29 42 30.5" stroke="#5C3317" stroke-width="1.3" stroke-linecap="round"/>
+
+  <!-- Nose -->
+  <ellipse cx="32" cy="39.5" rx="0.8" ry="0.5" fill="#E8C4A0"/>
+
+  <!-- Smile -->
+  <path d="M28.5 43.5C30 45.5 34 45.5 35.5 43.5" stroke="#5C3317" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+
+  <!-- Cheek blush -->
+  <circle cx="21" cy="40.5" r="2.5" fill="#FFB6B6" opacity="0.4"/>
+  <circle cx="43" cy="40.5" r="2.5" fill="#FFB6B6" opacity="0.4"/>
+
+  <!-- Black shirt -->
+  <path d="M21 53C21 49 26 47 32 47C38 47 43 49 43 53L45 64H19L21 53Z" fill="#2A2A2A"/>
+  <path d="M29 47L32 51.5L35 47" stroke="#1A1A1A" stroke-width="0.8" fill="none"/>
+</svg>
