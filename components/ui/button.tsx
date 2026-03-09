@@ -12,28 +12,26 @@ interface ButtonProps extends HTMLMotionProps<'button'> {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', children, ...props }, ref) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-medium transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed'
+      'inline-flex items-center justify-center font-semibold uppercase tracking-[0.1em] transition-all duration-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-50 disabled:cursor-not-allowed'
 
     const variants = {
-      primary:
-        'bg-gradient-to-r from-primary to-primary-light text-white hover:shadow-lg hover:shadow-primary/30 hover:scale-105',
-      secondary:
-        'bg-gradient-to-r from-secondary to-cyan-500 text-white hover:shadow-lg hover:shadow-secondary/30 hover:scale-105',
-      outline: 'border border-primary/50 text-primary hover:bg-primary/10 hover:border-primary',
-      ghost: 'text-foreground hover:bg-card',
+      primary: 'bg-primary text-background hover:brightness-110',
+      secondary: 'bg-secondary text-background hover:brightness-110',
+      outline: 'border border-card-border text-foreground hover:border-primary/30 hover:text-primary',
+      ghost: 'text-muted hover:text-foreground hover:bg-card-strong',
     }
 
     const sizes = {
-      sm: 'px-4 py-2 text-sm',
-      md: 'px-6 py-3 text-base',
-      lg: 'px-8 py-4 text-lg',
+      sm: 'px-3 py-1.5 text-xs',
+      md: 'px-5 py-2.5 text-sm',
+      lg: 'px-6 py-3 text-sm',
     }
 
     return (
       <motion.button
         ref={ref}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
-        whileTap={{ scale: 0.95 }}
+        whileTap={{ scale: 0.98 }}
         {...props}
       >
         {children}

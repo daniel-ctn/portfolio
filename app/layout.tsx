@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Geist_Mono, Manrope } from 'next/font/google'
+import { Instrument_Serif, Geist_Mono, Manrope } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 
@@ -13,10 +13,11 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-const cormorant = Cormorant_Garamond({
-  variable: '--font-cormorant',
+const instrumentSerif = Instrument_Serif({
+  variable: '--font-instrument',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
 })
 
 export const metadata: Metadata = {
@@ -39,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`${manrope.variable} ${cormorant.variable} ${geistMono.variable} antialiased`}>
+        <body className={`${manrope.variable} ${instrumentSerif.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
           <div className='animated-bg' />
           {children}
