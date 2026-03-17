@@ -336,24 +336,49 @@ main {
   animation: float 6s ease-in-out infinite;
 }
 
-section {
+.motion-section {
   position: relative;
-  padding: clamp(6rem, 10vw, 9rem) 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
-section + section::before {
+.motion-section .section-inner {
+  width: 100%;
+  padding: 5rem 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .motion-section .section-inner {
+    padding: 5rem 4rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .motion-section .section-inner {
+    padding: 5rem 6rem;
+  }
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.section-label::before {
   content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: min(60rem, calc(100% - 4rem));
+  display: block;
+  width: 2rem;
   height: 1px;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, transparent, rgba(var(--primary-rgb), 0.12), transparent);
-}
-
-[data-theme='light'] section + section::before {
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
+  background: var(--primary);
 }
 
 .link-hover {

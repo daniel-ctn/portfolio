@@ -1,8 +1,12 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { SectionHeading } from '@/components/ui/section-heading'
+import { useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { Code2, Blocks, Wrench, GraduationCap } from 'lucide-react'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const skillCategories = [
   {
@@ -13,12 +17,12 @@ const skillCategories = [
   {
     title: 'Web3',
     icon: Blocks,
-    skills: ['Web3.js', 'Ethers.js', 'wagmi', 'RainbowKit', 'Wallet Integration', 'Smart Contracts', 'DeFi', 'NFTs', 'IPFS'],
+    skills: ['Web3.js', 'Ethers.js', 'wagmi', 'RainbowKit', 'Wallet Integration', 'Smart Contracts', 'DeFi', 'NFTs'],
   },
   {
     title: 'Tools & Libraries',
     icon: Wrench,
-    skills: ['Git', 'GitHub Actions', 'TanStack Query', 'Redux', 'Zustand', 'GraphQL', 'REST APIs', 'Jest', 'AI Workflows'],
+    skills: ['Git', 'GitHub Actions', 'TanStack Query', 'Redux', 'Zustand', 'GraphQL', 'REST APIs', 'Jest'],
   },
   {
     title: 'Currently Learning',
@@ -27,63 +31,100 @@ const skillCategories = [
   },
 ]
 
-const staggerItem = {
-  hidden: { opacity: 0, y: 16, filter: 'blur(4px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
-  },
-}
-
 export function Skills() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useGSAP(
+    () => {
+      const section = sectionRef.current
+      if (!section) return
+
+      gsap.from('.skills-label', {
+        scrollTrigger: { trigger: section, start: 'top 78%', end: 'top 58%', scrub: 1 },
+        opacity: 0,
+        x: -30,
+        duration: 0.3,
+      })
+
+      gsap.from('.skills-title', {
+        scrollTrigger: { trigger: section, start: 'top 75%', end: 'top 52%', scrub: 1 },
+        opacity: 0,
+        y: 40,
+        filter: 'blur(8px)',
+        duration: 0.5,
+      })
+
+      gsap.from('.skills-intro', {
+        scrollTrigger: { trigger: section, start: 'top 72%', end: 'top 50%', scrub: 1 },
+        opacity: 0,
+        y: 20,
+        duration: 0.4,
+      })
+
+      gsap.utils.toArray<HTMLElement>('.skill-category').forEach((cat, i) => {
+        gsap.from(cat, {
+          scrollTrigger: { trigger: cat, start: 'top 88%', end: 'top 62%', scrub: 1 },
+          opacity: 0,
+          y: 40,
+          scale: 0.95,
+          filter: 'blur(4px)',
+          duration: 0.5,
+          delay: i * 0.05,
+        })
+      })
+
+      gsap.utils.toArray<HTMLElement>('.skill-tag-animated').forEach((tag, i) => {
+        gsap.from(tag, {
+          scrollTrigger: { trigger: tag.parentElement!, start: 'top 85%', end: 'top 55%', scrub: 1 },
+          opacity: 0,
+          y: 15,
+          scale: 0.8,
+          duration: 0.3,
+          delay: i * 0.02,
+        })
+      })
+    },
+    { scope: sectionRef }
+  )
+
   return (
-    <section id='skills' className='relative overflow-hidden'>
-      <div className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
-        <SectionHeading
-          align='left'
-          title='Capabilities & Tools'
-          subtitle='My current stack, the AI-assisted workflows I use every day, and the areas I am actively expanding into.'
-        />
+    <section ref={sectionRef} id='skills' className='motion-section relative'>
+      <div className='section-inner'>
+        <div className='mx-auto max-w-7xl'>
+          <div className='skills-label section-label'>Capabilities</div>
+          <h2 className='skills-title font-display text-5xl tracking-[-0.03em] text-foreground lg:text-6xl'>
+            Stack & Tools
+          </h2>
 
-        <div className='mt-4 border-l-2 border-primary/30 pl-5'>
-          <p className='max-w-xl text-base leading-relaxed text-foreground-soft'>
-            I still consider frontend engineering my strongest foundation, but I&apos;m intentionally broadening my range
-            with AI-native workflows, Python, PostgreSQL, and the technical knowledge that will matter more in the AI era.
+          <p className='skills-intro mt-5 max-w-xl text-base leading-relaxed text-foreground-soft'>
+            Frontend engineering is my strongest foundation, but I&apos;m intentionally broadening my range with
+            AI-native workflows and skills that will matter more in the AI era.
           </p>
-        </div>
 
-        <motion.div
-          className='mt-14 grid gap-6 md:grid-cols-2'
-          initial='hidden'
-          whileInView='visible'
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ staggerChildren: 0.1 }}
-        >
-          {skillCategories.map((category) => (
-            <motion.div
-              key={category.title}
-              variants={staggerItem}
-              className='group rounded-xl border border-card-border p-6 transition-colors hover:border-primary/20'
-            >
-              <div className='flex items-center gap-3'>
-                <div className='flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary'>
-                  <category.icon className='h-4 w-4' />
+          <div className='mt-12 grid gap-5 md:grid-cols-2'>
+            {skillCategories.map((category) => (
+              <div
+                key={category.title}
+                className='skill-category group rounded-xl border border-card-border p-6 transition-colors hover:border-primary/20'
+              >
+                <div className='flex items-center gap-3'>
+                  <div className='flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary'>
+                    <category.icon className='h-4 w-4' />
+                  </div>
+                  <h3 className='text-lg font-semibold text-foreground'>{category.title}</h3>
                 </div>
-                <h3 className='text-lg font-semibold text-foreground'>{category.title}</h3>
-              </div>
 
-              <div className='mt-5 flex flex-wrap gap-1.5'>
-                {category.skills.map((skill) => (
-                  <span key={skill} className='tech-tag'>
-                    {skill}
-                  </span>
-                ))}
+                <div className='mt-5 flex flex-wrap gap-1.5'>
+                  {category.skills.map((skill) => (
+                    <span key={skill} className='skill-tag-animated tech-tag'>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
