@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import { Code2, Blocks, Wrench, GraduationCap } from 'lucide-react'
+import { Code2, Sparkles, Database, Server } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,22 +12,22 @@ const skillCategories = [
   {
     title: 'Frontend',
     icon: Code2,
-    skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'TailwindCSS', 'Framer Motion', 'HTML5', 'CSS3'],
+    skills: ['Next.js', 'Next.js 16', 'TypeScript', 'TailwindCSS', 'Tailwind CSS', 'Zustand', 'TanStack Start'],
   },
   {
-    title: 'Web3',
-    icon: Blocks,
-    skills: ['Web3.js', 'Ethers.js', 'wagmi', 'RainbowKit', 'Wallet Integration', 'Smart Contracts', 'DeFi', 'NFTs'],
+    title: 'AI & Product',
+    icon: Sparkles,
+    skills: ['Vercel AI SDK', 'Gemini'],
   },
   {
-    title: 'Tools & Libraries',
-    icon: Wrench,
-    skills: ['Git', 'GitHub Actions', 'TanStack Query', 'Redux', 'Zustand', 'GraphQL', 'REST APIs', 'Jest'],
+    title: 'Auth & Data',
+    icon: Database,
+    skills: ['Auth.js', 'Prisma', 'Supabase', 'Neon', 'Drizzle'],
   },
   {
-    title: 'Currently Learning',
-    icon: GraduationCap,
-    skills: ['Python', 'PostgreSQL', 'Agentic Systems', 'Realtime Data Apps', 'Backend Foundations', 'AI/ML APIs'],
+    title: 'Backend & Integrations',
+    icon: Server,
+    skills: ['Wagmi', 'FastAPI', 'SQLAlchemy', 'NestJS', 'TypeORM'],
   },
 ]
 
@@ -97,8 +97,8 @@ export function Skills() {
           </h2>
 
           <p className='skills-intro mt-5 max-w-xl text-base leading-relaxed text-foreground-soft'>
-            Frontend engineering is my strongest foundation, but I&apos;m intentionally broadening my range with
-            AI-native workflows and skills that will matter more in the AI era.
+            The stack here is pulled from the products above, spanning AI features, modern frontend work, auth,
+            databases, and backend frameworks used across real builds.
           </p>
 
           <div className='mt-12 grid gap-5 md:grid-cols-2'>

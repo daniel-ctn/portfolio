@@ -14,8 +14,8 @@ const roles = ['agentic engineering', 'AI product building', 'real-time intellig
 
 const metrics = [
   { value: '9+', label: 'Years in frontend' },
-  { value: '1', label: 'AI product shipped' },
-  { value: 'Now', label: 'Building stock AI app' },
+  { value: '3+', label: 'AI product shipped' },
+  { value: 'Now', label: 'Building AI Planner app' },
 ]
 
 const socialLinks = [
