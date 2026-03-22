@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import { Code2, Sparkles, Database, Server } from 'lucide-react'
+import { Code2, Sparkles, Database, Server, GraduationCap, Wrench, Blocks } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,22 +12,22 @@ const skillCategories = [
   {
     title: 'Frontend',
     icon: Code2,
-    skills: ['Next.js', 'Next.js 16', 'TypeScript', 'TailwindCSS', 'Tailwind CSS', 'Zustand', 'TanStack Start'],
+    skills: ['React', 'Next.js', 'TanStack Start', 'TypeScript', 'JavaScript', 'TailwindCSS', 'Framer Motion'],
   },
   {
-    title: 'AI & Product',
-    icon: Sparkles,
-    skills: ['Vercel AI SDK', 'Gemini'],
+    title: 'Web3',
+    icon: Blocks,
+    skills: ['Web3.js', 'Ethers.js', 'wagmi', 'RainbowKit', 'Wallet Integration', 'Smart Contracts', 'DeFi', 'NFTs'],
   },
   {
-    title: 'Auth & Data',
-    icon: Database,
-    skills: ['Auth.js', 'Prisma', 'Supabase', 'Neon', 'Drizzle'],
+    title: 'Tools & Libraries',
+    icon: Wrench,
+    skills: ['Git', 'GitHub Actions', 'TanStack Query', 'Redux', 'Zustand', 'GraphQL', 'REST APIs', 'Jest'],
   },
   {
-    title: 'Backend & Integrations',
-    icon: Server,
-    skills: ['Wagmi', 'FastAPI', 'SQLAlchemy', 'NestJS', 'TypeORM'],
+    title: 'Currently Learning',
+    icon: GraduationCap,
+    skills: ['Python', 'NestJS', 'PostgreSQL', 'Agentic Systems', 'Realtime Data Apps', 'Backend Foundations', 'AI/ML APIs'],
   },
 ]
 
