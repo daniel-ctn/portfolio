@@ -18,6 +18,7 @@ import {
 import Image from 'next/image'
 import { BentoCard } from '@/components/bento/bento-card'
 import { AIChat } from '@/components/bento/ai-chat'
+import { TechBadge } from '@/components/ui/tech-badge'
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -96,7 +97,7 @@ const experiences = [
 const skillGroups = [
   { title: 'Frontend', icon: Code2, items: ['React', 'Next.js', 'TanStack Start', 'TypeScript', 'TailwindCSS', 'Framer Motion'] },
   { title: 'Web3', icon: Blocks, items: ['wagmi', 'Ethers.js', 'Smart Contracts', 'DeFi', 'NFTs'] },
-  { title: 'Tools', icon: Wrench, items: ['Git', 'TanStack Query', 'Zustand', 'GraphQL', 'Jest'] },
+  { title: 'Tools', icon: Wrench, items: ['Git', 'TanStack Query', 'Zustand', 'GraphQL', 'Vitest', 'Claude Code', 'Codex'] },
   { title: 'Learning', icon: GraduationCap, items: ['Python', 'NestJS', 'PostgreSQL', 'Agentic Systems'] },
 ]
 
@@ -416,9 +417,9 @@ export default function Home() {
                         <span className='text-muted'>&middot;</span>
                         <span className='font-mono text-[0.65rem]'>{exp.period}</span>
                       </p>
-                      <div className='mt-2 flex flex-wrap gap-1'>
+                      <div className='mt-2 flex flex-wrap gap-2'>
                         {exp.tech.map((t) => (
-                          <span key={t} className='tech-tag'>{t}</span>
+                          <TechBadge key={t} name={t} />
                         ))}
                       </div>
                     </div>
@@ -433,16 +434,16 @@ export default function Home() {
                   <h3 className='font-display text-lg font-bold text-foreground'>Stack & Tools</h3>
                 </div>
 
-                <div className='space-y-4'>
+                <div className='grid grid-cols-2 gap-3'>
                   {skillGroups.map((group) => (
                     <div key={group.title}>
-                      <div className='mb-2 flex items-center gap-2'>
+                      <div className='mb-1.5 flex items-center gap-2'>
                         <group.icon className='h-3.5 w-3.5 text-foreground-soft' />
                         <span className='text-xs font-semibold text-foreground'>{group.title}</span>
                       </div>
-                      <div className='flex flex-wrap gap-1'>
+                      <div className='flex flex-wrap gap-1.5'>
                         {group.items.map((skill) => (
-                          <span key={skill} className='tech-tag'>{skill}</span>
+                          <TechBadge key={skill} name={skill} variant='tile' />
                         ))}
                       </div>
                     </div>
