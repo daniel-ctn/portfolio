@@ -1,23 +1,20 @@
 import type { Metadata } from 'next'
-import { Instrument_Serif, Geist_Mono, Manrope } from 'next/font/google'
+import { Syne, DM_Sans, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
 
-const manrope = Manrope({
-  variable: '--font-manrope',
+const syne = Syne({
+  variable: '--font-syne',
+  subsets: ['latin'],
+})
+
+const dmSans = DM_Sans({
+  variable: '--font-dm-sans',
   subsets: ['latin'],
 })
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
-})
-
-const instrumentSerif = Instrument_Serif({
-  variable: '--font-instrument',
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
 })
 
 export const metadata: Metadata = {
@@ -28,7 +25,8 @@ export const metadata: Metadata = {
   authors: [{ name: 'Daniel Nguyen' }],
   openGraph: {
     title: 'Daniel Nguyen | Frontend Developer Building for the AI Era',
-    description: 'Senior frontend developer building AI-powered products, exploring agentic engineering, and shipping polished product experiences.',
+    description:
+      'Senior frontend developer building AI-powered products, exploring agentic engineering, and shipping polished product experiences.',
     type: 'website',
   },
 }
@@ -40,11 +38,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-        <body className={`${manrope.variable} ${instrumentSerif.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider>
-          <div className='animated-bg' />
-          {children}
-        </ThemeProvider>
+      <body className={`${syne.variable} ${dmSans.variable} ${geistMono.variable} antialiased`}>
+        <div className='animated-bg' />
+        {children}
       </body>
     </html>
   )
