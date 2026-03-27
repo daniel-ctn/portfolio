@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, Sparkles, X, RotateCcw } from 'lucide-react'
+import { Send, Sparkles, X, RotateCcw, ArrowUpRight } from 'lucide-react'
 
 const placeholderQuestions = [
   'Ask me about my AI projects...',
@@ -31,26 +31,44 @@ function getMessageText(parts: Array<{ type: string; text?: string }>): string {
     .join('')
 }
 
-function parseHighlightIds(text: string): string[] {
-  const match = text.match(/<!--HIGHLIGHT:\[([^\]]*)\]-->/)
-  if (!match) return []
-  try {
-    const ids = JSON.parse(`[${match[1]}]`) as string[]
-    return ids.filter((id) => VALID_IDS.includes(id))
-  } catch {
-    return []
+// Parse text with [[Label|id]] references into segments
+type MessageSegment = { type: 'text'; content: string } | { type: 'ref'; label: string; id: string }
+
+function parseMessageSegments(text: string): MessageSegment[] {
+  const segments: MessageSegment[] = []
+  const regex = /\[\[([^|]+)\|([^\]]+)\]\]/g
+  let lastIndex = 0
+  let match
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      segments.push({ type: 'text', content: text.slice(lastIndex, match.index) })
+    }
+    const id = match[2]
+    if (VALID_IDS.includes(id)) {
+      segments.push({ type: 'ref', label: match[1], id })
+    } else {
+      segments.push({ type: 'text', content: match[1] })
+    }
+    lastIndex = regex.lastIndex
   }
+
+  if (lastIndex < text.length) {
+    segments.push({ type: 'text', content: text.slice(lastIndex) })
+  }
+
+  return segments
 }
 
-function stripHighlightTag(text: string): string {
-  return text.replace(/<!--HIGHLIGHT:\[[^\]]*\]-->/, '').trim()
+function scrollToSection(id: string) {
+  const el = document.querySelector(`[data-section-${id}]`)
+  if (!el) return
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  el.classList.add('section-flash')
+  setTimeout(() => el.classList.remove('section-flash'), 1500)
 }
 
-interface AIChatProps {
-  onFilter: (highlightedIds: string[]) => void
-}
-
-export function AIChat({ onFilter }: AIChatProps) {
+export function AIChat() {
   const [input, setInput] = useState('')
   const [placeholderIndex, setPlaceholderIndex] = useState(0)
   const [displayedPlaceholder, setDisplayedPlaceholder] = useState('')
@@ -63,22 +81,7 @@ export function AIChat({ onFilter }: AIChatProps) {
 
   const isLoading = status === 'streaming' || status === 'submitted'
 
-  // Extract highlight IDs from the latest assistant message
-  useEffect(() => {
-    const lastAssistant = [...messages].reverse().find((m) => m.role === 'assistant')
-    if (lastAssistant && !isLoading) {
-      const text = getMessageText(lastAssistant.parts)
-      const ids = parseHighlightIds(text)
-      if (ids.length > 0) {
-        onFilter(ids)
-      }
-    }
-  }, [messages, isLoading, onFilter])
 
-  // Auto-scroll to latest message
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
 
   // Typewriter effect for placeholder
   useEffect(() => {
@@ -120,8 +123,7 @@ export function AIChat({ onFilter }: AIChatProps) {
   const handleClear = useCallback(() => {
     setMessages([])
     setInput('')
-    onFilter([])
-  }, [setMessages, onFilter])
+  }, [setMessages])
 
   const handleSubmit = useCallback(
     (e?: React.FormEvent) => {
@@ -175,20 +177,35 @@ export function AIChat({ onFilter }: AIChatProps) {
         <div className='mb-3 max-h-[200px] space-y-2.5 overflow-y-auto pr-1'>
           {messages.map((msg) => {
             const text = getMessageText(msg.parts)
-            const displayText = msg.role === 'assistant' ? stripHighlightTag(text) : text
 
-            if (!displayText && msg.role === 'assistant' && isLoading) return null
+            if (!text && msg.role === 'assistant' && isLoading) return null
+
+            const isUser = msg.role === 'user'
+            const segments = isUser ? [{ type: 'text' as const, content: text }] : parseMessageSegments(text)
 
             return (
-              <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={msg.id} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
                 <div
                   className={`max-w-[90%] rounded-xl px-3 py-2 text-xs leading-relaxed ${
-                    msg.role === 'user'
+                    isUser
                       ? 'bg-primary/15 text-primary-light'
                       : 'bg-white/4 text-foreground-soft'
                   }`}
                 >
-                  {displayText}
+                  {segments.map((seg, i) =>
+                    seg.type === 'text' ? (
+                      <span key={i}>{seg.content}</span>
+                    ) : (
+                      <button
+                        key={i}
+                        onClick={() => scrollToSection(seg.id)}
+                        className='mx-0.5 inline-flex items-center gap-1 rounded-md bg-primary/10 px-1.5 py-0.5 text-[0.6rem] font-medium text-primary transition-colors hover:bg-primary/20'
+                      >
+                        {seg.label}
+                        <ArrowUpRight className='h-2.5 w-2.5' />
+                      </button>
+                    )
+                  )}
                 </div>
               </div>
             )

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Github,
@@ -115,8 +115,8 @@ const stagger = {
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40, filter: 'blur(12px)' },
-  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const } },
 }
 
 // ─── ROLE ROTATOR ────────────────────────────────────────────────────────────
@@ -135,9 +135,9 @@ function RoleRotator() {
     <AnimatePresence mode='wait'>
       <motion.span
         key={roles[index]}
-        initial={{ opacity: 0, y: 12, filter: 'blur(6px)' }}
-        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-        exit={{ opacity: 0, y: -12, filter: 'blur(6px)' }}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.4 }}
         className='gradient-text font-display'
       >
@@ -150,16 +150,7 @@ function RoleRotator() {
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [highlightedIds, setHighlightedIds] = useState<string[]>([])
   const [activeProject, setActiveProject] = useState(0)
-
-  const handleFilter = useCallback((ids: string[]) => setHighlightedIds(ids), [])
-
-  const isFiltering = highlightedIds.length > 0
-  const cardState = (id: string) =>
-    !isFiltering
-      ? { highlighted: false, dimmed: false }
-      : { highlighted: highlightedIds.includes(id), dimmed: !highlightedIds.includes(id) }
 
   const project = projects[activeProject]
 
@@ -198,13 +189,6 @@ export default function Home() {
         </motion.div>
 
         <div className='relative z-10 max-w-3xl'>
-          <motion.div variants={fadeUp} className='mb-6 flex items-center gap-3'>
-            <span className='h-2 w-2 animate-pulse rounded-full bg-primary' />
-            <span className='font-mono text-[0.65rem] uppercase tracking-[0.2em] text-foreground-soft'>
-              Available for work &mdash; 2026
-            </span>
-          </motion.div>
-
           <motion.h1
             variants={fadeUp}
             className='font-display text-6xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-7xl lg:text-[5.5rem]'
@@ -263,12 +247,12 @@ export default function Home() {
       <div className='mx-auto max-w-[1400px] px-6 pb-20 lg:px-12'>
         <div className='grid gap-5 lg:grid-cols-12'>
           {/* ─── AI CHAT ─── 5 cols */}
-          <BentoCard className='lg:col-span-5 lg:row-span-1' delay={0.1} {...cardState('ai-chat')}>
-            <AIChat onFilter={handleFilter} />
+          <BentoCard className='lg:col-span-5 lg:row-span-1' delay={0.1}>
+            <AIChat />
           </BentoCard>
 
           {/* ─── PROJECTS SHOWCASE ─── 7 cols, tabbed */}
-          <BentoCard className='lg:col-span-7 p-0' delay={0.2} {...cardState(project.id)}>
+          <BentoCard className='lg:col-span-7 p-0' delay={0.2} sectionId={projects.map((p) => p.id)}>
             <div className='p-6 pb-0 lg:p-8 lg:pb-0'>
               {/* Project tabs */}
               <div className='mb-6 flex items-center gap-1'>
@@ -294,9 +278,9 @@ export default function Home() {
               <AnimatePresence mode='wait'>
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 15, filter: 'blur(8px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: -10, filter: 'blur(6px)' }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.35 }}
                 >
                   <div className='flex items-start justify-between'>
@@ -389,7 +373,7 @@ export default function Home() {
           </BentoCard>
 
           {/* ─── CAREER ─── 7 cols — Experience + Skills merged */}
-          <BentoCard className='lg:col-span-7' delay={0.3} {...cardState('experience')}>
+          <BentoCard className='lg:col-span-7' delay={0.3} sectionId={['experience', 'skills']}>
             <div className='grid gap-8 md:grid-cols-2'>
               {/* Experience side */}
               <div>
@@ -454,7 +438,7 @@ export default function Home() {
           </BentoCard>
 
           {/* ─── CONNECT ─── 5 cols — About + Contact merged */}
-          <BentoCard className='lg:col-span-5' delay={0.4} {...cardState('about')}>
+          <BentoCard className='lg:col-span-5' delay={0.4} sectionId={['about', 'contact']}>
             <div className='flex h-full flex-col'>
               <h3 className='font-display text-lg font-bold text-foreground'>
                 Building for the <span className='text-primary'>AI era</span>

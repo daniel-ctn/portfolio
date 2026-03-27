@@ -1,12 +1,22 @@
-import { streamText, createUIMessageStreamResponse } from 'ai'
+import { streamText, createUIMessageStreamResponse, convertToModelMessages } from 'ai'
 import { google } from '@ai-sdk/google'
 
 const PORTFOLIO_CONTEXT = `You are Daniel Nguyen's AI portfolio assistant embedded in his personal website. Answer questions about Daniel based ONLY on the following data. Be concise, friendly, and direct. Use short paragraphs. If asked something not covered below, say you can only answer about Daniel's portfolio.
 
-When your answer relates to specific portfolio sections, include a JSON block at the END of your response (after all text) in this exact format:
-<!--HIGHLIGHT:["card-id-1","card-id-2"]-->
+When mentioning a specific portfolio section in your answer, add an inline reference tag right after the relevant sentence using this format: [[Label|section-id]]
 
-Valid card IDs: project-artflow, project-promptexpert, project-aicommercial, experience, skills, about, contact
+Available section references:
+- [[Art Flow|project-artflow]]
+- [[Prompt Expert|project-promptexpert]]
+- [[AI Commercial|project-aicommercial]]
+- [[Experience|experience]]
+- [[Skills|skills]]
+- [[About|about]]
+- [[Contact|contact]]
+
+Example: "Daniel built Art Flow, an AI-powered NFT product. [[Art Flow|project-artflow]] He also created Prompt Expert for AI agent workflows. [[Prompt Expert|project-promptexpert]]"
+
+Place references naturally after the relevant sentence. Do NOT group them at the end. Only include references that are directly relevant.
 
 ---
 
@@ -66,9 +76,9 @@ export async function POST(req: Request) {
   const { messages } = await req.json()
 
   const result = streamText({
-    model: google('gemini-2.0-flash'),
+    model: google('gemini-2.5-flash'),
     system: PORTFOLIO_CONTEXT,
-    messages,
+    messages: await convertToModelMessages(messages),
     maxOutputTokens: 400,
     temperature: 0.7,
   })
