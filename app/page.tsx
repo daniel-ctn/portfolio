@@ -34,7 +34,7 @@ const projects = [
     githubUrl: '#',
     image: '/projects/art-flow-2.png',
     stats: [
-      { label: 'Users', value: '100+' },
+      { label: 'NFTs', value: '500+' },
       { label: 'Transactions', value: '10k+' },
     ],
   },
@@ -44,7 +44,7 @@ const projects = [
     subtitle: 'AI Agent Prompt Builder',
     description:
       'Helps users create efficient prompts for AI agents with a smoother workflow for drafting, refining, and organizing prompt ideas.',
-    technologies: ['Next.js 16', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Auth.js', 'Neon', 'Drizzle'],
+    technologies: ['Next.js 16', 'TypeScript', 'OpenAI', 'Tailwind CSS', 'Zustand', 'Auth.js', 'Neon', 'Drizzle'],
     liveUrl: 'https://prompt-expert-rust.vercel.app/',
     githubUrl: 'https://github.com/daniel-ctn/prompt-expert',
     image: '/projects/prompt-expert.png',
